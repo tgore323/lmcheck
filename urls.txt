@@ -1,4 +1,2 @@
-https://mirror.crexio.com/linuxmint/isos/testing/
-https://ftp.crifo.org/mint-cd/testing/
-https://mirror.crexio.com/linuxmint/isos/stable/21/'
-https://ftp.crifo.org/mint-cd/stable/21/
+https://mirror.crexio.com/linuxmint/isos/testing/sha256sum.txt
+https://ftp.crifo.org/mint-cd/testing/sha256sum.txt

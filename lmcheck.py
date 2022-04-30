@@ -1,76 +1,26 @@
 import time
 import hashlib
 import os
-from urllib.request import urlopen, Request
+import requests
+#from urllib import response
+#from urllib.request import urlopen, Request
 
-# testing_url1 = 'https://mirror.crexio.com/linuxmint/isos/testing/'
-# testing_url2 = 'https://ftp.crifo.org/mint-cd/testing/'
+# open file that contains URLs to check
+urls = open('urls.txt')
 
-# stable_url1 = 'https://mirror.crexio.com/linuxmint/isos/stable/21/'
-# stable_url2 = 'https://ftp.crifo.org/mint-cd/stable/21/'
+# check URLs for response code, then check for contents
+lines = urls.readlines()
+for line in lines:
+    r = requests.get(line)
+    if r.status_code == 200:
+        print("OK")
+        print(line)
+        print(r.text)
+        print(r.status_code)
+    else:
+        print("FAIL")
+        print(line)
+        print(r.status_code)
 
-
-urls = 'urls.txt'
-
-os.path.isfile(urls)
-if os.path.isfile(urls) == True:
-    urls = open(urls).read().splitlines()
-    for url in urls:
-        print("test")
-else:
-    print('File not found')
-    exit()
-
-
-
-
-# url = Request('https://leetcode.com/',
-# 			headers={'User-Agent': 'Mozilla/5.0'})
-
-# # to perform a GET request and load the
-# # content of the website and store it in a var
-# response = urlopen(url).read()
-
-# # to create the initial hash
-# currentHash = hashlib.sha224(response).hexdigest()
-# print("running")
-# time.sleep(10)
-# while True:
-# 	try:
-# 		# perform the get request and store it in a var
-# 		response = urlopen(url).read()
-		
-# 		# create a hash
-# 		currentHash = hashlib.sha224(response).hexdigest()
-		
-# 		# wait for 30 seconds
-# 		time.sleep(30)
-		
-# 		# perform the get request
-# 		response = urlopen(url).read()
-		
-# 		# create a new hash
-# 		newHash = hashlib.sha224(response).hexdigest()
-
-# 		# check if new hash is same as the previous hash
-# 		if newHash == currentHash:
-# 			continue
-
-# 		# if something changed in the hashes
-# 		else:
-# 			# notify
-# 			print("something changed")
-
-# 			# again read the website
-# 			response = urlopen(url).read()
-
-# 			# create a hash
-# 			currentHash = hashlib.sha224(response).hexdigest()
-
-# 			# wait for 30 seconds
-# 			time.sleep(30)
-# 			continue
-			
-# 	# To handle exceptions
-# 	except Exception as e:
-# 		print("error")
+# close file without changes
+urls.close()
